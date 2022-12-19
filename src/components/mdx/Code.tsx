@@ -1,19 +1,19 @@
 import { Component } from "@/types";
-import { useRef } from "react";
+import React, { useRef } from "react";
 import { FaCopy } from "react-icons/fa";
 
 export function Pre({ children }: Component) {
-  const preRef = useRef<HTMLPreElement>(null)
-  const getLang = (children: React.ReactNode) => {
+  const preRef = useRef<HTMLPreElement>(null);
+  const getLang = (children: React.ReactElement) => {
     try {
-      return children?.props.className.split("-")[1].toUpperCase()
+      return children.props.className.split("-")[1].toUpperCase();
     } catch {
-      return false
+      return false;
     }
-  }
+  };
 
-  const language = getLang(children)
-  
+  const language = getLang(children as React.ReactElement);
+
   return (
     <div>
       <div className="flex justify-between items-center px-0 bg-slate-900">
@@ -22,12 +22,18 @@ export function Pre({ children }: Component) {
         </div>
         <div
           className="cursor-pointer py-1.5 px-3 border-l-2 border-solid border-slate-800 hover:border-2 hover:border-decor-primary hover:border-solid"
-          onClick={async () => await navigator.clipboard.writeText(preRef.current?.textContent as string)}
+          onClick={async () =>
+            await navigator.clipboard.writeText(
+              preRef.current?.textContent as string
+            )
+          }
         >
           <FaCopy size={20} />
         </div>
       </div>
-      <pre ref={preRef} className="[&>code]:border-0 [&>code]:p-0 mt-0">{children}</pre>
+      <pre ref={preRef} className="[&>code]:border-0 [&>code]:p-0 mt-0">
+        {children}
+      </pre>
     </div>
   );
 }
