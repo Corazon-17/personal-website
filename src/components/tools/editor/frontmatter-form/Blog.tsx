@@ -49,8 +49,8 @@ export function Blog({ setFMValue }: { setFMValue: ValueSetter }) {
       />
       <TextInput
         label="Keywords"
-        value={blogFM["keyword"]}
-        valueKey="keyword"
+        value={blogFM["keywords"]}
+        valueKey="keywords"
         stateValue={blogFM}
         setValue={setBlogFM}
       />
