@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* import github-dark theme from highlight.js */
+@import url(./github-dark.css);
+
+::-webkit-scrollbar {
+  width: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #000;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #2563eb;
+}
+
+html {
+  background-color: #171717;
+}
+
+body > iframe {
+  display: none !important;
+}
+
+kbd {
+  border: 1px solid black;
+  border-radius: 4px;
+  padding: 3px 5px;
+  background-color: white;
+  color: black;
+  font-weight: bold;
+}
