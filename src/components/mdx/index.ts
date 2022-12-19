@@ -13,7 +13,7 @@ const MDXComponents = {
     pre: Pre,
     code: Code,
     a: Link,
-    img: MDXImage
+    // img: MDXImage
 };
 
 export default MDXComponents
