@@ -12,7 +12,8 @@ const MDXComponents = {
     h6: H6,
     pre: Pre,
     code: Code,
-    a: Link
+    a: Link,
+    img: MDXImage
 };
 
 export default MDXComponents
