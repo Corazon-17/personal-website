@@ -33,3 +33,7 @@ kbd {
   color: black;
   font-weight: bold;
 }
+
+pre::-webkit-scrollbar {
+  height: 3px;
+}

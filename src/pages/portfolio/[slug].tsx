@@ -37,7 +37,7 @@ export default function PortfolioContent({
         {/* Content */}
         <div
           className={`prose prose-invert ${
-            showTOC ? "sm:max-w-[70%]" : "sm:max-w-[88%]"
+            showTOC ? "sm:max-w-[68%]" : "sm:max-w-[88%]"
           }`}
         >
           <MDXRemote {...mdxSource} />

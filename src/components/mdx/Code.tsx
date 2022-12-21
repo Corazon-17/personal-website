@@ -15,7 +15,7 @@ export function Pre({ children }: Component) {
   const language = getLang(children as React.ReactElement);
 
   return (
-    <div>
+    <div className="grid max-w-[92vw]">
       <div className="flex justify-between items-center px-0 bg-slate-900">
         <div className="py-1.5 px-3 bg-decor-primary text-lg font-bold">
           {language}
@@ -40,7 +40,8 @@ export function Pre({ children }: Component) {
 
 export function Code({ children }: Component) {
   return (
-    <code className="p-1 border border-solid border-white before:content-[] after:content-[]">
+    // <code className="p-1 border border-solid border-white before:content-[] after:content-[]">
+    <code className="bg-transparent">
       {children}
     </code>
   );

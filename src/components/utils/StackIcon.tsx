@@ -17,6 +17,7 @@ import {
   SiPython,
   SiJupyter,
   SiStreamlit,
+  SiWhatsapp,
 } from "react-icons/si";
 
 interface StackIconProps {
@@ -98,6 +99,8 @@ export function StackIcon({ name, size }: StackIconProps) {
       return <SiJupyter className="text-orange-500" size={size} />
     case "streamlit":
       return <SiStreamlit className="text-red-700" size={size} />
+    case "whatsapp":
+      return <SiWhatsapp className="text-green-600" size={size} />
     default:
       return <SiStackoverflow size={size} />;
   }

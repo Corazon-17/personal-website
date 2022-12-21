@@ -18,11 +18,11 @@ export function TableOfContent({ show, setShow, heading }: TableOfContent) {
   return (
     <div
       className="
-        block fixed h-full top-20 justify-self-end max-w-[60%]
+        block fixed top-20 max-h-[80vh] justify-self-end max-w-[60%]
         sm:absolute sm:top-0 sm:max-w-[30%] z-50"
     >
       {show ? (
-        <ul className="px-2 sticky top-20 h-full bg-zinc-800 sm:bg-transparent sm:top-4 sm:h-fit">
+        <ul className="px-2 py-4 sticky top-20 h-full bg-zinc-800 sm:bg-transparent sm:top-4 sm:h-fit">
           <button
             className="flex w-full text-left justify-between items-center text-lg font-bold mb-2 pb-1 border-b"
             onClick={handleTOC}

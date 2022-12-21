@@ -12,7 +12,7 @@ export function Navbar() {
 
   const TopNav: React.FC = () => {
     return (
-      <header className="fixed grid sm:hidden top-0 w-full py-4 z-[100] backdrop-blur-sm bg-inherit">
+      <header className={`fixed grid sm:hidden top-0 w-full py-4 z-[100] backdrop-blur-sm ${show ? "bg-inherit": "bg-transparent"}`}>
         <div className="flex justify-between self-center px-4 font-bold">
           <Link href="/" onClick={closeMenu}>
             <Image

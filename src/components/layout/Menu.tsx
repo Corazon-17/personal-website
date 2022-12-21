@@ -1,4 +1,4 @@
-import { menu, social } from "@/data/link";
+import { menu, other, social } from "@/data/link";
 import Link from "next/link";
 import { ExternalLink, StackIcon } from "@/components/utils";
 import { useRouter } from "next/router";
@@ -43,13 +43,19 @@ export default function Menu({ withHome, onClick }: MenuProps) {
         ))}
       </nav>
 
-      <div className="flex gap-4 mt-4 pb-2">
-        {social.map(({ name, url }) => (
-          <ExternalLink key={name} url={url}>
-            <StackIcon name={name} />
-          </ExternalLink>
+      <nav className="grid w-full py-3">
+        {other.map(({ name, path }) => (
+          <Link
+            key={name}
+            href={path}
+            className={`w-full text-center text-lg ${
+              pathname.split("/")[1] === path.slice(1) && "text-decor-primary"
+            }`}
+          >
+            {name}
+          </Link>
         ))}
-      </div>
+      </nav>
     </div>
   );
 }
