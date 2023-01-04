@@ -57,7 +57,7 @@ export function StackIcon({ name, size }: StackIconProps) {
       );
     case "tailwindcss":
       return <SiTailwindcss className="text-sky-600" size={size} />;
-    case "react":
+    case "reactjs":
       return <SiReact className="text-blue-500" size={size} />;
     case "nextjs":
       return (
