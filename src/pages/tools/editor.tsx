@@ -5,18 +5,26 @@ import { MDXRemote } from "next-mdx-remote";
 import { preprocess, keyEvent } from "@/components/tools/editor/utils";
 import { Toolbar } from "@/components/tools/editor";
 import { useLocalStorage } from "@/hooks";
+import CustomHead from "@/components/utils/CustomHead";
 
 export default function Editor() {
   const [mdText, setMdText] = useLocalStorage("mdText", "");
   const [parsedHTML, setParsedHTML] = useState<ReactElement>();
   const textAreaRef = useRef<any>();
 
+  const headProps = {
+    title: "Markdown Editor",
+    description: "Markdown editor",
+    keywords: ["markdown editor"],
+    type: "website",
+  };
+
   useEffect(() => {
     const parseHTML = async () => {
       const mdxSource = await serialize(preprocess(mdText), {
         mdxOptions: { rehypePlugins: [rehypeHighlight] },
       });
-      
+
       return mdxSource;
     };
 
@@ -27,6 +35,7 @@ export default function Editor() {
 
   return (
     <div>
+      <CustomHead {...headProps} />
       <Toolbar textAreaRef={textAreaRef} setValue={setMdText} />
       <div className="grid gap-4 sm:grid-cols-2 sm:gap-1 min-h-screen">
         <textarea
