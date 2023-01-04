@@ -1,0 +1,42 @@
+---
+title: "Feature Scaling"
+description: "A collection of functions to normalize the range of values in an array."
+topic: "typescript"
+---
+
+## Rescaling (Min-Max Normalization)
+
+```ts
+export const scaleMinMax = (data: number[]) => {
+  const min = Math.min(...data);
+  const range = Math.max(...data) - min;
+  const result = data.map((dt) => (dt - min) / range);
+
+  return result;
+};
+```
+
+## Standardization (Z-Score Normalization)
+
+```ts
+export const scaleStandard = (data: number[]) => {
+  const mu = meanArray(data);
+  const std = stdArray(data);
+  const result = data.map((dt) => (dt - mu) / std);
+
+  return result;
+};
+```
+
+## Robust Scaling
+
+```ts
+export const scaleRobust = (data: number[]) => {
+  const q1 = quantile(data, 25);
+  const med = quantile(data, 50);
+  const q3 = quantile(data, 75);
+  const result = data.map((dt) => (dt - med) / (q3 - q1));
+
+  return result;
+};
+```

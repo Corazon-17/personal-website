@@ -1,0 +1,55 @@
+---
+title: "Data Format Conversion"
+description: "A collection of functions to convert data format."
+topic: "typescript"
+---
+
+## Convert CSV To JSON
+
+```ts
+export const CSVToJSON = (str: string) => {
+  const regex = /(".*?"|[^",\n]+)(?=\s*,|\s*$)/g;
+  const headers = str.trim().slice(0, str.indexOf("\n")).match(regex);
+  const rows = str
+    .trim()
+    .slice(str.indexOf("\n") + 1)
+    .split("\n");
+
+  const newArray = rows.map((row) => {
+    const values = row.match(regex);
+    const eachObject = headers?.reduce((obj: any, header, i) => {
+      if (values) {
+        obj[header] =
+          values[i] === " "
+            ? undefined
+            : !Number.isNaN(Number(values[i]))
+            ? Number(values[i])
+            : values[i];
+      } else {
+        obj[header] = undefined;
+      }
+
+      return obj;
+    }, {});
+
+    return eachObject;
+  });
+
+  return newArray;
+};
+```
+
+## Convert JSON To CSV
+
+```ts
+export const JSONToCSV = (JSON: Array<{}>) => {
+  const columns = Object.keys(JSON[0]);
+  let csv = columns.toString();
+
+  JSON.forEach((data) => {
+    csv += `\n${Object.values(data).toString()}`;
+  });
+
+  return csv;
+};
+```

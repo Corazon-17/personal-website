@@ -1,0 +1,80 @@
+---
+title: "Object Manipulation"
+description: "A collection of functions to manipulate/filter an object."
+topic: "typescript"
+---
+
+## objectFromArray
+
+A function to create an object from value(s) in array as key(s), and any data type as value(s).
+
+```ts
+export const objectFromArray = (array: string[], value: any) => {
+  if (typeof value !== "object") {
+    return Object.fromEntries(array.map((item) => [item, value]));
+  }
+
+  return Object.fromEntries(array.map((item, i) => [item, value[i]]));
+};
+```
+
+## getTruthyKeys
+
+A function to get object keys with truthy values.
+
+```ts
+export const getTrueKeys = (object: {}): string[] => {
+  type ObjectKey = keyof typeof object;
+
+  return Object.keys(object).filter((key) => object[key as ObjectKey]);
+};
+```
+
+## filterByKeys
+
+A function to filter an object by it's key names.
+
+```ts
+export const filterByKeys = (object: {}, keys: string[]) => {
+  type ObjectKey = keyof typeof object;
+
+  const filteredMap = Object.keys(object)
+    .map((key) => {
+      if (keys.includes(key)) {
+        return [key, object[key as ObjectKey]];
+      }
+
+      return;
+    })
+    .filter((item) => item !== undefined);
+  const result = Object.fromEntries(filteredMap as Array<[]>);
+
+  return result;
+};
+```
+
+## filterByValue(s)
+
+A function to filter an object by it's values.
+
+```ts
+export const filterByValues = (object: {}, values: any[]) => {
+  type ObjectKey = keyof typeof object;
+
+  const filteredMap = Object.keys(object)
+    .map((key) => {
+      const value = object[key as ObjectKey];
+
+      if (values.includes(value)) {
+        return [key, object[key as ObjectKey]];
+      }
+
+      return;
+    })
+    .filter((item) => item !== undefined);
+
+  const result = Object.fromEntries(filteredMap as Array<[]>);
+
+  return result;
+};
+```

@@ -1,0 +1,51 @@
+---
+title: "String Transformation"
+description: "A collection of functions to transform a string into different form."
+topic: "typescript"
+---
+
+## Lower And Split By Hyphen
+
+A function to transform a string into lower case and separate each word with hyphen symbol. This is useful if you wanna make a url slug based on the article/post title, instead of write it manually.
+
+```ts
+type BaseCase = "camel" | "snake" | "pascal" | undefined;
+
+const lowerAndSplitByHyphen = (str: string, baseCase: BaseCase = undefined) => {
+  if (baseCase === "camel" || baseCase === "pascal") {
+    let splitted = str.split(/(?=[A-Z])/);
+
+    return splitted.join("-").toLowerCase();
+  } else if (baseCase === "snake") {
+    return str.replaceAll("_", "-").toLowerCase();
+  }
+
+  return str.replaceAll(" ", "-").toLowerCase();
+};
+```
+
+## Split And Capitalize Each Word
+
+A function to split a string and capitalize each word. This is useful when you wanna make a header/title from object keys.
+
+```ts
+type BaseCase = "camel" | "snake" | "pascal" | undefined;
+
+const splitAndCapitalize = (str: string, baseCase: BaseCase = undefined) => {
+  let splitted: string[];
+
+  if (baseCase === "camel" || baseCase === "pascal") {
+    splitted = str.split(/(?=[A-Z])/);
+  } else if (baseCase === "snake") {
+    splitted = str.split("_");
+  } else {
+    splitted = str.split(" ");
+  }
+
+  const result = splitted.map(
+    (word) => word.charAt(0).toUpperCase() + word.slice(1)
+  );
+
+  return result.join(" ");
+};
+```

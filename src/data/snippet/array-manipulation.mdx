@@ -1,0 +1,165 @@
+---
+title: "Array Manipulation"
+description: "A collection of functions to manipulate or calculate value in array."
+topic: "typescript"
+---
+
+## sortArray
+
+A function to sort values in an array.
+
+```ts
+export const sortArray = (data: any[], order: "asc" | "desc" = "asc") => {
+  const dtype =
+  if (order === "asc") {
+    return data.sort((a, b) => a - b);
+  }
+
+  return data.sort((a, b) => b - a);
+};
+```
+
+## sumArray
+
+A function to get sum or total addition of two or more values (number) in an array.
+
+```ts
+export const sumArray = (data: number[]) => {
+  const nonNull = data.filter(Number);
+
+  return nonNull.reduce((acc, val) => acc + val, 0);
+};
+```
+
+## meanArray
+
+A function to get mean or average value in an array.
+
+```ts
+// we need sumArray() function above.
+export const meanArray = (data: number[]) => {
+  const nonNull = data.filter(Number);
+
+  return sumArray(nonNull) / nonNull.length;
+};
+```
+
+## modeArray
+
+A function to get mode value in an array.
+
+```ts
+export const modeArray = (data: any[]) => {
+  const nonNull = data.filter((val) => val !== undefined && val.trim() !== "");
+  const dtype = typeof nonNull[0];
+
+  let obj: any = {};
+  nonNull.forEach((val) => {
+    if (obj[val]) {
+      obj[val]++;
+    } else {
+      obj[val] = 1;
+    }
+  });
+
+  const mode = Object.keys(obj).reduce((a, b) => (obj[a] > obj[b] ? a : b));
+  const result = dtype === "number" ? Number(mode) : mode;
+
+  return result;
+};
+```
+
+## stdArray
+
+A function to get standard deviation of a set of values in an array.
+
+```ts
+// we need meanArray() function above.
+export const stdArray = (data: number[]) => {
+  const mu = meanArray(data);
+  const diff = data.map((dt) => (dt - mu) ** 2);
+
+  return Math.sqrt(sumArray(diff) / (data.length - 1));
+};
+```
+
+# quantileArray
+
+A function to get quantile value of a set of values in an array.
+
+```ts
+// we need sortArray() function above.
+export const quantile = (data: number[], percent: number) => {
+  const sorted = sortArray(data);
+  const pos = (data.length - 1) * (percent / 100);
+  const base = Math.floor(pos);
+  const result =
+    sorted[base + 1] !== undefined
+      ? sorted[base] + (pos - base) * (sorted[base + 1] - sorted[base])
+      : sorted[base];
+
+  return result;
+};
+```
+
+## countNull
+
+A function to count falsey values in an array.
+
+```ts
+// we consider 0 as valid value here, (you can remove `(val === 0 ? 0 :` if you don't).
+export const countNull = (data: Array<any>) => {
+  const result = data.reduce(
+    (sum, val) => sum + (val === 0 ? 0 : val ? 0 : 1),
+    0
+  );
+
+  return result;
+};
+```
+
+## shuffleArray
+
+A function to shuffle values in an array.
+
+```ts
+export const shuffleArray = (data: Array<any>) => {
+  const shuffleIdx = [...Array(data.length).keys()]
+    .map((value) => ({ value, sort: Math.random() }))
+    .sort((a, b) => a.sort - b.sort)
+    .map(({ value }) => value);
+
+  return shuffleIdx.map((idx) => data[idx]);
+};
+```
+
+## binArray
+
+A function to bin (group a number of more or less continuous values into a smaller number of bins) values in an array.
+
+```ts
+// we need sortArray() function above.
+export const binArray = (data: number[], nBins: number = 8) => {
+  let sortedData = sortArray(data);
+
+  const diff = Math.max(...data) - Math.min(...data);
+  const binLimit = [...Array(nBins)].map(
+    (_, i) => ((i + 1) / nBins) * diff + Math.min(...data)
+  );
+
+  const binLabel = binLimit.map(
+    (val, i) => `${i === 0 ? Math.min(...data) : binLimit[i - 1]} - ${val}`
+  );
+  const binValue = [...Array(nBins)].map((_, i) => {
+    const value = sortedData.filter((dt) => dt <= binLimit[i]);
+    sortedData.splice(0, value.length);
+
+    return value.length;
+  });
+
+  return {
+    label: binLabel,
+    value: binValue,
+  };
+};
+```
