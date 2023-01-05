@@ -49,7 +49,7 @@ const Introduction = () => {
           Well-organized person, fast learner, and problem solver. I can do
           anything independently, but i&apos;m also a good team player. Always
           curious about something new, and always wanted to be better. Looking
-          for opportunities to work on worderful projects with wonderful people.
+          for opportunities to work on wonderful projects with wonderful people.
         </Text>
       </div>
     </section>
