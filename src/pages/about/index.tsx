@@ -28,7 +28,7 @@ const Introduction = () => {
     12 * (now.getFullYear() - start.getFullYear());
 
   return (
-    <section className="grid md:grid-cols-2">
+    <section className="grid">
       <div className="grid gap-3">
         <Title>Introduction</Title>
 
