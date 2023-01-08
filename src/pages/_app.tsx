@@ -44,7 +44,7 @@ export default function App({ Component, pageProps, router }: AppProps) {
           animate="visible"
           exit="exit"
           variants={variants}
-          className="mt-16 sm:mt-0 ml-0 sm:ml-32 bg-content-primary text-text-primary min-h-screen"
+          className="mt-16 sm:mt-0 ml-0 sm:ml-40 bg-content-primary text-text-primary min-h-screen"
         >
           <Content>
             <MDXProvider components={MDXComponents}>

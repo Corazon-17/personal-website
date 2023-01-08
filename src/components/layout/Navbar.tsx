@@ -34,7 +34,7 @@ export function Navbar() {
 
   const SideNav: React.FC = () => {
     return (
-      <aside className="fixed hidden sm:block h-screen w-32 py-4 bg-inherit border-y-8 border-decor-primary">
+      <aside className="fixed hidden sm:block h-screen w-40 py-4 bg-inherit border-y-8 border-decor-primary">
         <Menu withHome />
       </aside>
     );
